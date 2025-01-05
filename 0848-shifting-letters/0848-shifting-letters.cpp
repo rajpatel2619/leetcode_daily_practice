@@ -6,8 +6,8 @@ public:
             shifts[i] = (shifts[i]+shifts[i+1])%26;
         for(int i=0;i<n;i++){
             char ch = s[i];
-            ch = (((ch-'a')+shifts[i])%97)+'a';
-            // cout<<ch<<" ";
+            int t = ((ch-'a')+shifts[i])%26;
+            ch = t+'a';
             s[i] = ch;
         }
         return s;
