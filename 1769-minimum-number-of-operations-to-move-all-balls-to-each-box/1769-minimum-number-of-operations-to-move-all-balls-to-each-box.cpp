@@ -1,23 +1,26 @@
 class Solution {
 public:
-    vector<int> minOperations(string str) {
-        int n = str.size();
-        vector<int> res(n);
+    vector<int> minOperations(string boxes) {
+        int n = boxes.size();
+        int rones = 0, lones = 0;
+        long long rsum = 0;
         for(int i=0;i<n;i++){
-            int cnt = 0;
-            //prev
-            for(int j=i-1;j>=0;j--){
-                if(str[j]=='1'){
-                    cnt+=abs(i-j);
-                }
+            if(boxes[i]=='1'){
+                rsum+=i;
+                rones++;
             }
-            //after
-            for(int j=i+1;j<n;j++){
-                if(str[j]=='1'){
-                    cnt+=abs(j-i);
-                }
+        }
+        vector<int> res(n);
+        long long lsum = 0;
+        for(int i=0;i<n;i++){
+            int m = lsum+rsum;
+            res[i] = m;
+            if(boxes[i]=='1'){
+                rones--;
+                lones++;
             }
-            res[i] = cnt;
+            rsum-=rones;
+            lsum+=lones;
         }
         return res;
     }
