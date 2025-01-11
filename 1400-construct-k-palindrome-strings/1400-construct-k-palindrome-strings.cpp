@@ -6,8 +6,6 @@ public:
         if(n<k) return false;
         for(int i=0;i<n;i++)
             f[s[i]-'a']++;
-        for(auto el:f)
-            cout<<el<<" ";
         int cnt = 0;
         for(auto &el:f)
             if(el&1)
