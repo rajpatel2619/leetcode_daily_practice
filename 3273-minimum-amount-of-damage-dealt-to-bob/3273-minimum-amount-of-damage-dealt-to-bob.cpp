@@ -7,7 +7,7 @@ public:
             arr[i] = {damage[i], ceil((double)health[i]/power)};
         }
         sort(arr.begin(), arr.end(), [](auto &p, auto &q){
-            return p.first*q.second>=p.second*q.first;
+            return (long long)p.first*q.second>(long long)p.second*q.first;
         });
 
         long long td = 0, t = 0;
