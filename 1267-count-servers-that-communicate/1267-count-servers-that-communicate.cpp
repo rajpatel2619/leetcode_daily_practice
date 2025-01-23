@@ -13,23 +13,15 @@ public:
                 }
             }
         }
-
+        int c = 0;
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
                 if(grid[i][j] && (left[i]>1 || up[j]>1)){
-                    grid[i][j] = 1;
-                }else{
-                    grid[i][j] = 0;
+                    c++;
                 }
             }
         }
         
-        int c = 0;
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-                c+=grid[i][j];
-            }
-        }
         return c;
     }
 };
