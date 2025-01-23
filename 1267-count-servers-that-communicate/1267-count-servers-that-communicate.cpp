@@ -23,20 +23,13 @@ public:
                 }
             }
         }
-        for(auto e:left)
-            cout<<e<<" ";
-        cout<<endl;
-        for(auto e:up)
-            cout<<e<<' ';
-        cout<<endl;
-        int count = 0;
+        
+        int c = 0;
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
-                cout<<grid[i][j]<<" ";
-                count+=grid[i][j];
+                c+=grid[i][j];
             }
-            cout<<endl;
         }
-        return count;
+        return c;
     }
 };
