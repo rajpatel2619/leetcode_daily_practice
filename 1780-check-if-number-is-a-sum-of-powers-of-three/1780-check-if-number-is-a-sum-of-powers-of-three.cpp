@@ -2,10 +2,11 @@ class Solution {
 public:
     bool func(int n, int p){
         if(n==0) return true;
-        if(pow(3,p)>n) return false;
+        long long num = pow(3,p); 
+        if(num>n) return false;
         bool t=false;
-        if(pow(3, p)<=n){
-            t = func(n-pow(3,p), p+1);
+        if(num<=n){
+            t = func(n-num, p+1);
         }
         if(t)
             return true;
