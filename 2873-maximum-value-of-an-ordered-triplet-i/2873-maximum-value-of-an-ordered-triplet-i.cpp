@@ -12,11 +12,7 @@ public:
         for(int i=n-2;i>=0;i--){
             mn[i] = max(mn[i+1], nums[i]);
         }
-        for(int i=0;i<n;i++){
-            cout<<mx[i]<<" "<<mn[i]<<" n ";
-        }
         for(int i=1;i<n-1;i++){
-                // cout<<(long long)nums[i]*(mx[j]-mn[j+1])<<endl;
                 maxi = max(maxi, (long long)mn[i+1]*(mx[i-1]-nums[i]));
         }
         return maxi;
