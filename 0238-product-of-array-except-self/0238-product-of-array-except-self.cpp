@@ -2,27 +2,19 @@ class Solution {
 public:
     vector<int> productExceptSelf(vector<int>& nums) {
         int n = nums.size();
-        int tp = 1;
-        int zi = -1;
-        vector<int> arr(n,0);
+        vector<int> arr(n);
+        for(int i=n-1;i>=0;i--){
+            if(i==n-1) arr[i]=nums[i];
+            else arr[i] = nums[i]*arr[i+1];
+        }
+        int cp = 1;
         for(int i=0;i<n;i++){
-            if(nums[i]==0){
-                if(zi>=0){
-                    return arr;
-                }else
-                    zi=i;
+            if(i==n-1){
+                arr[i] = cp;
             }else{
-                tp*=nums[i];
+                arr[i] = cp*arr[i+1];
+                cp*=nums[i];
             }
-        }
-        
-        if(zi>=0){
-            arr[zi] = tp;
-            return arr;
-        }
-
-        for(int i=0;i<n;i++){
-            arr[i] = tp/nums[i];
         }
         return arr;
     }
