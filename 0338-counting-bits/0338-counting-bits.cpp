@@ -12,7 +12,7 @@ public:
         vector<int> ans;
         ans.reserve(n+1);
         for(int i=0;i<=n;i++)
-            ans.push_back(bitsCount(i));
+            ans.push_back(__builtin_popcount(i));
         return ans;
     }
 };
