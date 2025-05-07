@@ -9,9 +9,10 @@ public:
         return c;
     }
     vector<int> countBits(int n) {
-        vector<int> ans(n+1);
+        vector<int> ans;
+        ans.reserve(n+1);
         for(int i=0;i<=n;i++)
-            ans[i] = bitsCount(i);
+            ans.push_back(bitsCount(i));
         return ans;
     }
 };
