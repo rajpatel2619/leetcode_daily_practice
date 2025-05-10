@@ -19,10 +19,8 @@ public:
         }
         else if(co==0){
             if(so>=st+ct) return so;
-            else return -1;
         }else if(ct==0){
             if(st>=so+co) return st;
-            else return -1;
         }else{
             if(so==st) return so+max(ct,co);
             else return max(so+co,st+ct);
