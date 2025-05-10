@@ -1,13 +1,16 @@
 class Solution {
 public:
-    int func(int ind, vector<int> &dp){
-        if(ind<0) return 0;
-        if(ind==0) return 1;
+    int func(int ind, int n, vector<int> &dp){
+        if(ind==n) return 1;
         if(dp[ind]!=-1) return dp[ind];
-        return dp[ind] = func(ind-1, dp)+func(ind-2, dp);
+        int one = 0, two = 0;
+        one = func(ind+1, n, dp);
+        if(ind+2<=n)
+            two = func(ind+2, n, dp);
+        return dp[ind] = one+two;
     }
     int climbStairs(int n) {
         vector<int> dp(n+1, -1);
-        return func(n, dp);
+        return func(0, n, dp);
     }
 };
