@@ -22,8 +22,7 @@ public:
         }else if(ct==0){
             if(st>=so+co) return st;
         }else{
-            if(so==st) return so+max(ct,co);
-            else return max(so+co,st+ct);
+            return max(so+co,st+ct);
         }
         return -1;
     }
