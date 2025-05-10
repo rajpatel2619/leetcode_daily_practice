@@ -1,20 +1,17 @@
 class Solution {
 public:
-    bool canJump(vector<int>& nums) {
-        int n = nums.size();
-        
-        queue<int> q;
-        q.push(0);
-        int far = 0;
-        while(!q.empty()){
-            auto node = q.front();
-            q.pop();
-            for(int i=max(node + 1, far + 1);i<=min(n-1, node+nums[node]);i++){
-                if(i==n-1) return true;
-                q.push(i);
-            }
-            far = max(far, node+nums[node]);
+    bool func(int ind, vector<int>& nums, vector<int>&dp){
+        if(ind>=nums.size()) return false;
+        if(ind==nums.size()-1) return true;
+        if(dp[ind]!=-1) return dp[ind];
+        for(int i=ind+1;i<=ind+nums[ind];i++){
+            if(func(i, nums, dp))
+                return true;
         }
-        return far>=n-1;
+        return dp[ind] = false;
+    }
+    bool canJump(vector<int>& nums) {
+        vector<int> dp(nums.size(), -1);
+        return func(0, nums, dp);
     }
 };
