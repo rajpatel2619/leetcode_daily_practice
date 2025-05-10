@@ -13,17 +13,11 @@ public:
             if(el==0)
                 ct++;
         }
-        if(co==0 && ct==0){
-            if(so==st) return st;
-            else return -1;
-        }
-        else if(co==0){
-            if(so>=st+ct) return so;
-        }else if(ct==0){
-            if(st>=so+co) return st;
-        }else{
-            return max(so+co,st+ct);
-        }
-        return -1;
+        so+=co;
+        st+=ct;
+
+        if(so>st and ct==0) return -1;
+        if(st>so and co==0) return -1;
+        return max(so,st);
     }
 };
