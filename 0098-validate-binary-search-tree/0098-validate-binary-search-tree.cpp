@@ -11,19 +11,19 @@
  */
 class Solution {
 public:
-    long long prev = -1e10;
+    void preorder(TreeNode* root, vector<int>&res){
+        if(!root) return;
+        preorder(root->left, res);
+        res.push_back(root->val);
+        preorder(root->right, res);
+    }
     bool isValidBST(TreeNode* root) {
-        if(!root) return true;
-        
-        if(!isValidBST(root->left))
-            return false;
-
-        if(root->val>prev)
-            prev = root->val;
-        else return false;
-
-        
-        return isValidBST(root->right);
-
+        vector<int> res;
+        preorder(root, res);
+        for(int i=1;i<res.size();i++){
+            if(res[i]<=res[i-1])
+                return false;
+        }
+        return true;
     }
 };
