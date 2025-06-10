@@ -1,14 +1,14 @@
 class Solution {
 public:
     int maxDifference(string s) {
-        vector<int> f(26,0);
+        unordered_map<int, int> f;
         for(auto ch:s)
             f[ch-'a']++;
         int odd = INT_MIN, even = INT_MAX;
-        for(auto fr:f){
-            if(fr&1)
-                odd = max(odd, fr);
-            else if(fr!=0) even = min(even, fr);
+        for(auto [key, val]:f){
+            if(val&1)
+                odd = max(odd, val);
+            else if(val!=0) even = min(even, val);
         }
         if(even==INT_MAX) return odd;
         return odd-even;
