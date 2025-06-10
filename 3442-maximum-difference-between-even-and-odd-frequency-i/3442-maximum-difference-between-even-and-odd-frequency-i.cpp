@@ -8,9 +8,8 @@ public:
         for(auto [key, val]:f){
             if(val&1)
                 odd = max(odd, val);
-            else if(val!=0) even = min(even, val);
+            else even = min(even, val);
         }
-        if(even==INT_MAX) return odd;
         return odd-even;
     }
 };
