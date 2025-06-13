@@ -13,7 +13,8 @@ public:
 
     int minimizeMax(vector<int>& nums, int p) {
         sort(nums.begin(), nums.end());
-        int left = 0, right = nums.back() - nums.front(), ans = right;
+        int left = 0, right = nums.back();
+        int ans = right;
         
         while(left <= right){
             int mid = (left + right) / 2;
