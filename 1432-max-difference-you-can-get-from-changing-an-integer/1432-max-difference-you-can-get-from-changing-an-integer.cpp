@@ -19,7 +19,7 @@ public:
         //modifying mini for the min value
         if(s[0]=='1'){
             i = 1;
-            while(s[i]=='1')
+            while(s[i]=='1' or s[i]=='0')
                 i++;
             char ch = s[i];
             for(i;i<s.size();i++){
