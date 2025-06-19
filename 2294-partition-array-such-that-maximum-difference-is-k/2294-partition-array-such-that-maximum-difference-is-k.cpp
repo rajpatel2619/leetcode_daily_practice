@@ -22,8 +22,7 @@ public:
     int partitionArray(vector<int>& nums, int k) {
         int n = nums.size();
         sort(nums.begin(), nums.end());
-        // [1, 1, 3, 3, 4, 5, 7, 8, 9], k = 2, (size - n/3 = 3)
-        
+        // [1, 2, 3, 5, 6], k = 2
         int mini = nums[0];
         int count = 0;
         for(int i=1;i<n;i++){
