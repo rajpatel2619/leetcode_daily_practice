@@ -1,17 +1,43 @@
+// class Solution {
+// public:
+//     int partitionArray(vector<int>& nums, int k) {
+//         int n = nums.size();
+//         sort(nums.begin(), nums.end());
+//         int count = 0;
+//         int mini = nums[0];
+//         for(int i=0;i<n;i++){
+//             if(nums[i]-mini <= k) continue;
+//             else{
+//                 count++;
+//                 mini = nums[i];
+//             }
+//         }
+//         return count+1;
+//     }
+// };
+
+
 class Solution {
 public:
     int partitionArray(vector<int>& nums, int k) {
         int n = nums.size();
         sort(nums.begin(), nums.end());
-        int count = 0;
+        // [1, 1, 3, 3, 4, 5, 7, 8, 9], k = 2, (size - n/3 = 3)
+        vector<int> temp;
         int mini = nums[0];
-        for(int i=0;i<n;i++){
-            if(nums[i]-mini <= k) continue;
-            else{
-                count++;
+        temp.push_back(mini);
+        vector<vector<int>> res;
+        for(int i=1;i<n;i++){
+            if((nums[i]-mini)<=k){
+                temp.push_back(nums[i]);
+            }else{
+                res.push_back(temp);
+                temp.clear();
                 mini = nums[i];
+                temp.push_back(mini);
             }
         }
-        return count+1;
+        res.push_back(temp);
+        return res.size();
     }
 };
