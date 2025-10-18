@@ -2,14 +2,18 @@ class Solution {
 public:
     int trap(vector<int>& nums) {
         int n = nums.size();
-        vector<int> pref(n, nums[0]), suff(n, nums[n-1]);
-        for(int i=1;i<n;i++)
-            pref[i] = max(pref[i-1], nums[i]);
-        for(int i=n-2;i>=0;i--)
-            suff[i] = max(suff[i+1], nums[i]);
+        int l = 0, lmax = nums[0], r = n-1, rmax = nums[n-1];
         int water = 0;
-        for(int i=1;i<n-1;i++){
-            water+=max(0, min(pref[i-1], suff[i+1])-nums[i]);
+        while(l<=r){
+            lmax = max(lmax, nums[l]);
+            rmax = max(rmax, nums[r]);
+            if(lmax<=rmax){
+                water+=max(0, min(lmax, rmax)-nums[l]);
+                l++;
+            }else{
+                water+=max(0, min(lmax, rmax)-nums[r]);
+                r--;
+            }
         }
         return water;
     }
