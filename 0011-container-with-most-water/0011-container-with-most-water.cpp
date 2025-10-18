@@ -2,14 +2,20 @@ class Solution {
 public:
     int maxArea(vector<int>& nums) {
         int n = nums.size();
-        int left = 0, right = n-1;
-        int maxi = INT_MIN;
-        while(left<right){
-            maxi = max(maxi, min(nums[left], nums[right])*(right-left));
-            if(nums[left]<=nums[right]){
-                left++;
-            }else
-                right--;
+        int l = 0, lmax=nums[0], r = n-1, rmax = nums[n-1];
+        int maxi = 0;
+        while(l<=r){
+            lmax = max(lmax, nums[l]);
+            rmax = max(rmax, nums[r]);
+            if(lmax<=rmax){
+                int mini = min(lmax, rmax);
+                maxi = max(maxi, mini*(r-l));
+                l++;
+            }else{
+                int mini = min(lmax, rmax);
+                maxi = max(maxi, mini*(r-l));
+                r--;
+            }
         }
         return maxi;
     }
