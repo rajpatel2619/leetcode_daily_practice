@@ -11,15 +11,14 @@
  */
 class Solution {
 public:
-    bool isSame(TreeNode* t, TreeNode* s){
-        if(!t and !s) return true;
-        if(!t || !s || t->val!=s->val) return false;
-        return isSame(t->left, s->left) and isSame(t->right, s->right);
+    bool isSameTree(TreeNode* p, TreeNode* q){
+        if(!p and !q) return true;
+        if(!p or !q) return false;
+        return p->val==q->val and isSameTree(p->left, q->left) and isSameTree(p->right, q->right);
     }
-    bool isSubtree(TreeNode* root, TreeNode* subRoot) {
-        if(!root) return false;
-        if(isSame(root, subRoot))
-            return true;
-        return isSubtree(root->left, subRoot) || isSubtree(root->right, subRoot);
+    bool isSubtree(TreeNode* p, TreeNode* q) {
+        if(!p and !q) return true;
+        if(!p or !q) return false;
+        return isSameTree(p, q) or isSubtree(p->left, q) or isSubtree(p->right, q);
     }
 };
