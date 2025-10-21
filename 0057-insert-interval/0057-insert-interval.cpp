@@ -1,18 +1,23 @@
 class Solution {
 public:
-    vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
-        intervals.push_back(newInterval);
-        sort(intervals.begin(), intervals.end());
+    vector<vector<int>> merge(vector<vector<int>>& its) {
         vector<vector<int>> res;
-        res.push_back(intervals[0]);
-        for(int i=1;i<intervals.size();i++){
-            if(res.back()[1]<intervals[i][0]){
-                res.push_back(intervals[i]);
+        sort(its.begin(), its.end());
+        int n = its.size();
+        res.push_back(its[0]);
+        for(int i=1;i<n;++i){
+            auto node = its[i];
+            if(node[0]<=res.back()[1]){
+                res.back()[1] = max(res.back()[1], node[1]);
             }else{
-                res.back()[0] = min(res.back()[0], intervals[i][0]);
-                res.back()[1] = max(res.back()[1], intervals[i][1]);
+                res.push_back(node);
             }
         }
         return res;
+    }
+    vector<vector<int>> insert(vector<vector<int>>& its, vector<int>& nit) {
+        its.emplace_back(nit);
+        sort(its.begin(), its.end());
+        return merge(its);
     }
 };
