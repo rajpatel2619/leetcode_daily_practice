@@ -12,10 +12,22 @@
 class Solution {
 public:
     void inorder(TreeNode* root, vector<int> &res){
-        if(!root) return;
-        inorder(root->left, res);
-        res.emplace_back(root->val);
-        inorder(root->right, res);
+        stack<TreeNode*> st;
+        while(root or !st.empty()){
+            // going deeper in left
+            while(root){
+                st.push(root);
+                root = root->left;
+            }
+
+            // inorder val
+            root = st.top();
+            st.pop();
+            res.emplace_back(root->val);
+
+            // go one step right
+            root = root->right;
+        }
     }
     bool isValidBST(TreeNode* root) {
         vector<int> res;
