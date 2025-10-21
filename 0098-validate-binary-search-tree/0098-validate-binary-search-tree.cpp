@@ -11,19 +11,18 @@
  */
 class Solution {
 public:
-    void preorder(TreeNode* root, vector<int>&res){
+    void inorder(TreeNode* root, vector<int> &res){
         if(!root) return;
-        preorder(root->left, res);
-        res.push_back(root->val);
-        preorder(root->right, res);
+        inorder(root->left, res);
+        res.emplace_back(root->val);
+        inorder(root->right, res);
     }
     bool isValidBST(TreeNode* root) {
         vector<int> res;
-        preorder(root, res);
-        for(int i=1;i<res.size();i++){
+        inorder(root, res);
+        for(int i=1;i<res.size();++i)
             if(res[i]<=res[i-1])
                 return false;
-        }
         return true;
     }
 };
