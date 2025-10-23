@@ -17,7 +17,10 @@ public:
             curr = curr->next;
         }
         if(!curr){
-            return head->next;
+            ListNode* temp = head;
+            head = head->next;
+            delete temp;
+            return head;
         }
         while(curr->next){
             prev = prev->next;
