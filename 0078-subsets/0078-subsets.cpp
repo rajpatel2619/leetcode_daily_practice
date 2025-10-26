@@ -1,19 +1,16 @@
 class Solution {
 public:
-    void func(int ind, vector<int> &nums, vector<int>&path, vector<vector<int>>&res){
-        if(ind==-1){
-            res.push_back(path);
-            return;
-        }
-        func(ind-1, nums, path, res);
-        path.push_back(nums[ind]);
-        func(ind-1, nums, path, res);
-        path.pop_back();
-    }
     vector<vector<int>> subsets(vector<int>& nums) {
+        int n = nums.size();
+        int terms = 1<<n;
         vector<vector<int>> res;
-        vector<int> path;
-        func(nums.size()-1, nums, path, res);
+        for(int i=0;i<terms;i++){
+            vector<int> temp;
+            for(int j=0;j<n;j++)
+                if(i&(1<<j)) 
+                    temp.push_back(nums[j]);
+            res.push_back(temp);
+        }
         return res;
     }
 };
