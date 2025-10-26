@@ -1,17 +1,19 @@
 class Solution {
 public:
-    int func(int ind, int prev, vector<int> &nums, vector<vector<int>>& dp){
-        if(ind==nums.size()) return 0;
-        if(dp[ind][prev+1]!=-1) return dp[ind][prev+1];
-        int ntake = 0 + func(ind+1, prev, nums, dp);
-        int take = 0;
-        if(prev==-1 || ind!=prev+1)
-            take = nums[ind]+func(ind+1, ind, nums, dp);
-        return dp[ind][prev+1] =  max(take, ntake);
+    int func(int ind, vector<int> &dp, vector<int>& nums){
+        if(ind<=0){
+            if(ind==0) return nums[ind];
+            return 0;
+        }
+        if(dp[ind]!=-1) return dp[ind];
+        int ntake = func(ind-1, dp, nums);
+        int take = nums[ind]+func(ind-2, dp, nums);
+
+        return dp[ind] =  max(take, ntake);
     }
     int rob(vector<int>& nums) {
         int n = nums.size();
-        vector<vector<int>>dp(n, vector<int>(n+1, -1));
-        return func(0, -1, nums, dp);    
+        vector<int> dp(n, -1);
+        return func(n-1, dp, nums);
     }
 };
