@@ -13,7 +13,17 @@ public:
     }
     int rob(vector<int>& nums) {
         int n = nums.size();
-        vector<int> dp(n, -1);
-        return func(n-1, dp, nums);
+        vector<int> dp(n, 0);
+
+        // base case
+        dp[0] = nums[0];
+        for(int i=1;i<n;i++){
+            int ntake = dp[i-1];
+            int take = nums[i];
+            if(i-2>=0)
+                take += dp[i-2];
+            dp[i] = max(take, ntake);
+        }
+        return dp[n-1];
     }
 };
