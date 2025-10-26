@@ -1,22 +1,22 @@
 class Solution {
 public:
-    int minCoins(int ind, vector<int>&coins, int target, vector<vector<int>>&dp){
+    int func(int ind, vector<int> &nums, int tar, vector<vector<int>> &dp){
         if(ind==0){
-            if(target%coins[ind]==0) return target/coins[ind];
-            return 1e9;
+            if(tar%nums[ind]==0) return tar/nums[ind];
+            return 1e8;
         }
-        if(dp[ind][target]!=-1) return dp[ind][target];
-        int ntake = minCoins(ind-1, coins, target, dp);
-        int take = INT_MAX;
-        if(coins[ind]<=target)
-            take = 1+minCoins(ind, coins, target-coins[ind], dp);
-        return dp[ind][target] = min(take, ntake);
+        if(dp[ind][tar]!=-1) return dp[ind][tar];
+        int ans = func(ind-1, nums, tar, dp);
+        if(tar>=nums[ind]){
+            ans = min(ans, 1+func(ind, nums, tar-nums[ind], dp));
+        }
+        return dp[ind][tar] = ans;
     }
     int coinChange(vector<int>& coins, int amount) {
-        int n  = coins.size();
-        vector<vector<int>>dp(n, vector<int>(amount+1, -1));
-        int ans = minCoins(n-1, coins, amount, dp);
-        if(ans>=1e9) return -1;
+        int n = coins.size();
+        vector<vector<int>> dp(n, vector<int>(amount+1, -1));
+        int ans = func(n-1, coins, amount, dp);
+        if(ans>=1e8) return -1;
         return ans;
     }
 };
