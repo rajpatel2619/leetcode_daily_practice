@@ -1,26 +1,19 @@
 class Solution {
 public:
-    bool wordBreak(string s, vector<string>& wordDict) {
-        int n = s.length();
-        unordered_set<string> dict;
-        for(string &e:wordDict)
-            dict.insert(e);
-        
-        int dp[n+1];
-        memset(dp,0,sizeof dp);
-        
-        dp[n]=1;
-        
-        for(int i=n-1;i>=0;i--){
-            string word;
-            for(int j=i;j<n;j++){
-                word.push_back(s[j]);
-                if(dict.find(word)!=dict.end()){
-                    if(dp[j+1])
-                        dp[i]=1;
-                }
-            }
+    bool func(int ind, string &str, unordered_set<string> &ust, vector<int> &dp){
+        if(ind==str.size()) return true;
+        if(dp[ind]!=-1) return dp[ind];
+        for(int i=ind;i<str.size();++i){
+            if(ust.count(str.substr(ind, i-ind+1)))
+                if(func(i+1, str, ust, dp))
+                    return dp[ind] = true;
         }
-        return dp[0];
+        return dp[ind] = false;
+    }
+    bool wordBreak(string s, vector<string>& wordDict) {
+        unordered_set<string> st(wordDict.begin(), wordDict.end());
+        int n = s.size();
+        vector<int> dp(n, -1);
+        return func(0, s, st, dp);
     }
 };
